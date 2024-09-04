@@ -1,4 +1,6 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
+#include "qolMacros.hpp"
 
 #include <exception>
 
@@ -56,14 +58,24 @@ Bureaucrat::Bureaucrat(int grade): _name("Lineu")
 	}
 }
 
-unsigned int Bureaucrat::getGrade(void) const
+void Bureaucrat::signForm(Form& obj)
 {
-	return this->_grade;
-}
+	if (this->getGrade() <= obj.getSignGrade())
+	{
+		if (obj.isSigned() == true)
+		{
+			println(this->getName() << " could not sign form " << obj.getName()
+		   << " because it is already signed.");
+			return;
+		}
 
-std::string Bureaucrat::getName(void) const
-{
-	return this->_name;
+		println(this->getName() << " signed form " << obj.getName());
+	}
+	else 
+	{
+		println(this->getName() << " could not sign form " << obj.getName()
+		  <<" because bureaucrat level is too low.");
+	}
 }
 
 void Bureaucrat::incrementGrade(void)
@@ -90,6 +102,16 @@ void Bureaucrat::decrementGrade(void)
 		this->_grade++;
 		return;
 	}
+}
+
+unsigned int Bureaucrat::getGrade(void) const
+{
+	return this->_grade;
+}
+
+std::string Bureaucrat::getName(void) const
+{
+	return this->_name;
 }
 
 const char* Bureaucrat::GradeTooHighException::what(void) const throw()

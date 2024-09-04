@@ -7,7 +7,8 @@ DEBUG_FLAGS = -g3
 SRC_DIR = src/
 SRC_FILES = $(addprefix $(SRC_DIR), \
 			main.cpp \
-			Bureaucrat.cpp)
+			Bureaucrat.cpp \
+			Form.cpp)
 
 OBJ_DIR = obj/
 OBJ_FILES = $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.cpp=.o)))
@@ -17,7 +18,7 @@ INC_DIR = src/include
 all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
-	@echo "Linking executable..."
+	@echo "Linking objects and generating executable \033[32m$(NAME)\033[0m"
 	@$(CC) $(FLAGS) -I $(INC_DIR) $(SRC_FILES) -o $(NAME)
 	@echo "Done."
 

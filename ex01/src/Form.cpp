@@ -1,4 +1,5 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Form::Form(void): _name("Default Form"), _isSigned(false),_signGrade(1),
 	_execGrade(1)
@@ -36,6 +37,21 @@ _name(name), _isSigned(false), _signGrade(signGrade), _execGrade(execGrade)
 	}
 }
 
+void Form::beSigned(Bureaucrat& obj)
+{
+	obj.signForm(*this);
+	
+	if (this->getSignGrade() < obj.getGrade())
+	{
+		throw Form::GradeTooLowException();
+		return;
+	}
+	else
+	{
+		this->_isSigned = true;
+	}
+}
+
 std::string Form::getName(void) const
 {
 	return this->_name;
@@ -57,6 +73,16 @@ unsigned int Form::getExecGrade(void) const
 	return this->_execGrade;
 }
 
+const char* Form::GradeTooHighException::what(void) const throw()
+{
+	return "Form Grade is too high.";
+}
+
+const char* Form::GradeTooLowException::what(void) const throw()
+{
+	return "Form Grade is too low.";
+}
+
 std::ostream& operator<<(std::ostream& os, const Form& obj)
 {
 	os << "Form Name: " << obj.getName() << ". Sign Grade: " <<
@@ -73,3 +99,5 @@ std::ostream& operator<<(std::ostream& os, const Form& obj)
 
 	return os;
 }
+
+

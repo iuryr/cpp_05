@@ -1,71 +1,95 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include "qolMacros.hpp"
 
 int main(void)
 {
-	println("Bureaucrat b1;");
-	Bureaucrat b1;
+	Bureaucrat b1(1);
+	Bureaucrat b2("Mendonça", 2);
+	Form f1;
 
-	println("Bureaucrat b2(b1);");
-	Bureaucrat b2(b1);
-
-	println("Bureaucrat b3 = b1;");
-	Bureaucrat b3 = b1;
+	println("Form information:");
+	println(f1);
 	println("");
 
-	println("" << b3);
-	println("");
-	println("Incrementing b3 grade by 1...");
-	b3.incrementGrade();
-	println("" << b3);
-	println("");
-	println("Decrementing b3 grade by 1...");
-	b3.decrementGrade();
-	println("" << b3);
+	println("Bureaucrats information:");
+	println(b1);
+	println(b2);
 	println("");
 
-	println("Try-Catch: Decrementing grade out of bound:");
-	try
+	println("Let the lesser bereaucrat try and sign the form...");
+	try 
 	{
-		b3.decrementGrade();
+		f1.beSigned(b2);
+	}
+	catch (std::exception& e)
+	{
+		e.what();
+	}
+	println("");
+
+	println("Now let's call the pros...");
+	f1.beSigned(b1);
+	println(f1);
+	println("");
+
+	println("Let the pro try to sign an already signed form...");
+	f1.beSigned(b1);
+	println(f1);
+
+	println("");
+	println("Testing exception throwing for malformed forms (get it? huh?)");
+	try 
+	{
+		Form f2("Bad Form", 1000, 1);
 	}
 	catch (std::exception& e)
 	{
 		println(e.what());
 	}
-	println("");
 
-	println("Try-Catch: Incrementing grade out of bound:");
-	Bureaucrat b4(1);
-	try
+	try 
 	{
-		b4.incrementGrade();
+		Form f2("Bad Form", 1, 1000);
 	}
 	catch (std::exception& e)
 	{
 		println(e.what());
 	}
-	println("");
 
-	println("Try-Catch: Construction out of lower bound");
-	try
+	try 
 	{
-		Bureaucrat b5(151);
+		Form f2("Bad Form", 0, 1);
 	}
 	catch (std::exception& e)
 	{
 		println(e.what());
 	}
-	println("");
 
-	println("Try-Catch: Construction out of upper bound");
-	try
+	try 
 	{
-		Bureaucrat b5(-50);
+		Form f2("Bad Form", 1, 0);
 	}
 	catch (std::exception& e)
 	{
 		println(e.what());
 	}
-	println("");
+
+	try 
+	{
+		Form f2("Bad Form", 0, 1000);
+	}
+	catch (std::exception& e)
+	{
+		println(e.what());
+	}
+
+	try 
+	{
+		Form f2("Bad Form", 1000, 0);
+	}
+	catch (std::exception& e)
+	{
+		println(e.what());
+	}
 }
