@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "qolMacros.hpp"
 
 #include <exception>
@@ -58,7 +58,7 @@ Bureaucrat::Bureaucrat(int grade): _name("Lineu")
 	}
 }
 
-void Bureaucrat::signForm(Form& obj)
+void Bureaucrat::signForm(AForm& obj)
 {
 	if (this->getGrade() <= obj.getSignGrade())
 	{

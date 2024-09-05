@@ -4,7 +4,7 @@
 #include <exception>
 #include <iostream>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -17,7 +17,7 @@ public:
 	Bureaucrat(std::string name, int grade);
 	Bureaucrat(int grade);
 
-	void signForm(Form& obj);
+	void signForm(AForm& obj);
 	void incrementGrade(void);
 	void decrementGrade(void);
 

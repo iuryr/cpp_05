@@ -9,9 +9,9 @@ class AForm
 {
 public:
 	AForm(void);
-	~AForm(void);
-	AForm(const Form& obj);
-	AForm& operator=(const Form& obj);
+	virtual ~AForm(void);
+	AForm(const AForm& obj);
+	AForm& operator=(const AForm& obj);
 
 	AForm(std::string name, unsigned int signGrade, unsigned int execGrade);
 
@@ -37,11 +37,12 @@ public:
 
 private:
 	const std::string _name;
+	const std::string _target;
 	bool _isSigned;
 	const unsigned int _signGrade;
 	const unsigned int _execGrade;
 };
 
-std::ostream& operator<<(std::ostream& os, const Form& obj);
+std::ostream& operator<<(std::ostream& os, const AForm& obj);
 
 #endif // _AFORM_HPP
