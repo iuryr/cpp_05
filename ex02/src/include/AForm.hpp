@@ -14,11 +14,14 @@ public:
 	AForm& operator=(const AForm& obj);
 
 	AForm(std::string name, unsigned int signGrade, unsigned int execGrade);
+	AForm(std::string name, std::string target, unsigned int signGrade, unsigned int execGrade);
 
-	virtual void execute(Bureaucrat& obj) = 0;
 	void beSigned(Bureaucrat& obj);
+	bool checkRequirements(const Bureaucrat& executor) const;
+	virtual bool execute(Bureaucrat const & executor) const = 0;
 
 	std::string getName(void) const;
+	std::string getTarget(void) const;
 	bool isSigned(void) const;
 	unsigned int getSignGrade(void) const;
 	unsigned int getExecGrade(void) const;
@@ -30,6 +33,12 @@ public:
 	};
 
 	class GradeTooLowException: public std::exception
+	{
+	public:
+		const char* what(void) const throw();
+	};
+
+	class UnsignedFormException: public std::exception
 	{
 	public:
 		const char* what(void) const throw();

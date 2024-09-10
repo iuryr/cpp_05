@@ -129,3 +129,21 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj)
 	os << obj.getName() << ", bureaucrat grade " << obj.getGrade();
 	return os;
 }
+
+void Bureaucrat::executeForm(const AForm &form)
+{
+	try
+	{
+		if (form.execute(*this) == true)
+		{
+			println(this->getName() << " executed " << form.getName());
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		println(e.what());
+		println(this->getName() << " could not execute " << form.getName());
+	}
+
+}

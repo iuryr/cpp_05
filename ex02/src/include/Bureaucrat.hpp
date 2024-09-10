@@ -18,6 +18,7 @@ public:
 	Bureaucrat(int grade);
 
 	void signForm(AForm& obj);
+	void executeForm(AForm const & form);
 	void incrementGrade(void);
 	void decrementGrade(void);
 

@@ -15,6 +15,8 @@ public:
 	ShrubberyCreationForm& operator=(const ShrubberyCreationForm& obj);
 
 	ShrubberyCreationForm(std::string target);
+
+	bool execute(Bureaucrat const & executor) const;
 };
 
 #endif //_SHRUBBERY_CREATION_FORM_HPP_
