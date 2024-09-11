@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "qolMacros.hpp"
@@ -103,4 +104,53 @@ int main(void)
 	println("");
 	println("Trying to execute form with suficient grade...");
 	b45.executeForm(f2);
+
+	println("");
+	println("Presidential Pardon tests");
+	Bureaucrat b25(25);
+	Bureaucrat b5(5);
+	PresidentialPardonForm f3("Iury");
+
+	println(f3);
+	println("");
+
+	try
+	{
+		println("Trying to execute before signing...");
+		b1.executeForm(f3);
+	}
+	catch (std::exception& e)
+	{
+		println(e.what());
+	}
+	
+	try
+	{
+		println("");
+		println("Trying to sign form without suficient grade...");
+		f3.beSigned(b150);
+	}
+	catch (std::exception& e)
+	{
+		println(e.what());
+	}
+
+	println("");
+	println("Trying to sign form with suficient grade...");
+	f3.beSigned(b25);
+
+	try
+	{
+		println("");
+		println("Trying to execute form without suficient grade...");
+		b25.executeForm(f3);
+	}
+	catch (std::exception& e)
+	{
+		println(e.what());
+	}
+
+	println("");
+	println("Trying to execute form with suficient grade...");
+	b5.executeForm(f3);
 }
