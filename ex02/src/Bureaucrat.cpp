@@ -145,5 +145,4 @@ void Bureaucrat::executeForm(const AForm &form)
 		println(e.what());
 		println(this->getName() << " could not execute " << form.getName());
 	}
-
 }

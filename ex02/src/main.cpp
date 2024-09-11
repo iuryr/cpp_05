@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "qolMacros.hpp"
 
@@ -53,4 +54,53 @@ int main(void)
 	println("");
 	println("Trying to execute form with suficient grade...");
 	b137.executeForm(f1);
+
+	println("");
+	println("Robotomy Request tests");
+	Bureaucrat b45(45);
+	Bureaucrat b72(72);
+	RobotomyRequestForm f2("Bender");
+
+	println(f2);
+	println("");
+
+	try
+	{
+		println("Trying to execute before signing...");
+		b1.executeForm(f2);
+	}
+	catch (std::exception& e)
+	{
+		println(e.what());
+	}
+	
+	try
+	{
+		println("");
+		println("Trying to sign form without suficient grade...");
+		f2.beSigned(b150);
+	}
+	catch (std::exception& e)
+	{
+		println(e.what());
+	}
+
+	println("");
+	println("Trying to sign form with suficient grade...");
+	f2.beSigned(b72);
+
+	try
+	{
+		println("");
+		println("Trying to execute form without suficient grade...");
+		b72.executeForm(f2);
+	}
+	catch (std::exception& e)
+	{
+		println(e.what());
+	}
+
+	println("");
+	println("Trying to execute form with suficient grade...");
+	b45.executeForm(f2);
 }

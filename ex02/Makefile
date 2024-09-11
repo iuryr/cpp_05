@@ -9,7 +9,8 @@ SRC_FILES = $(addprefix $(SRC_DIR), \
 			main.cpp \
 			Bureaucrat.cpp \
 			AForm.cpp \
-			ShrubberyCreationForm.cpp)
+			ShrubberyCreationForm.cpp \
+			RobotomyRequestForm.cpp)
 
 OBJ_DIR = obj/
 OBJ_FILES = $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.cpp=.o)))
